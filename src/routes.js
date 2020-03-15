@@ -1,5 +1,6 @@
 const express = require("express");
 const routes = express.Router();
+const ProjectsController = require("./controllers/ProjectsController");
 
 const checkUserExist = (req, res, next) => {
   if (!req.body.name) {
@@ -58,4 +59,9 @@ routes.delete("/users/:index", checkUserInArray, (req, res) => {
   res.status(200).send();
 });
 
+routes.get("/projects", ProjectsController.index);
+routes.post("/projects/", ProjectsController.store);
+routes.put("/projects/:id", ProjectsController.update);
+routes.delete("/projects/:id", ProjectsController.destroy);
+routes.post("/projects/:id/tasks", ProjectsController.addtask);
 module.exports = routes;
